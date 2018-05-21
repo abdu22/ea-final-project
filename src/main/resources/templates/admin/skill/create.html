@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<title>Skill</title>
+</head>
+<body>
+	<div th:replace="fragments/menu :: menu"></div>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Skill</h3>
+			</div>
+			<div class="panel-body">
+				<form th:object="${skill}" th:action="@{/admin/skill/create}" method="post">
+					<div th:if="${#fields.hasErrors('name')}"
+						class="alert alert-warning alert-dismissible" th:errors="*{name}">
+					</div>
+					<div class="form-group row">
+						<label for="skillName" class="col-sm-2 col-form-label">Name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="skillName" placeholder="Name" th:field="*{name}" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{id}" /> <input type="submit" class="btn btn-primary" value="Create" th:if="*{id} == 0" /> 
+					<input type="submit" class="btn btn-primary" value="Update" th:if="*{id} != 0" />
+				</form>
+			</div>
+		</div>
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+</body>
+</html>

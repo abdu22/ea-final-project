@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<title>Project Management</title>	
+</head>
+<body>
+	<div th:replace="fragments/menu :: menu"></div>
+	
+	<h1 class="display-3 text-center my-4">Project Management</h1>
+	<div class="container">
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Projects</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Status</th>
+								<th scope="col">Start Date</th>
+								<th scope="col">End Date</th>
+								<th scope="col">Location</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="proj : ${projects}">
+								<td class="col-md-2" scope="row"><a
+									th:href="@{'/project/details/'+${proj.id}}"
+									th:text="${proj.name}"> </a></td>
+								<td class="col-md-2" th:text="${proj.status}"></td>
+								<td class="col-md-2" th:text="${proj.startDate}"></td>
+								<td class="col-md-2" th:text="${proj.endDate}"></td>
+								<td class="col-md-2" th:text="${proj.location}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div th:replace="fragments/footer :: footer"></div> -->
+	<div style="margin-top:500px;"></div>
+
+</body>
+</html>
