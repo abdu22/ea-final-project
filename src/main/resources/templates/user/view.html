@@ -32,14 +32,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="project : ${user.projects}">
-								<td class="col-md-3" scope="row"><a
-									th:href="@{/admin/project/create(id=${project.id})}"
-									th:text="${project.name}"></a></td>
+								<td class="col-md-2" th:text="${project.name}"></td>
 								<td class="col-md-2" th:text="${project.location}"></td>
 								<td class="col-md-2" th:text="${project.startDate}"></td>
 								<td class="col-md-2" th:text="${project.endDate}"></td>
 								<td class="col-md-2" th:text="${project.status}"></td>
-								<td class="col-md-1"><a th:href="@{/project/view(id=${project.id})}">Detail</a></td>
+								<td class="col-md-1"><a th:href="@{'/project/details/'+${project.id}}">Detail</a></td>
 							</tr>
 						</tbody>
 					</table>

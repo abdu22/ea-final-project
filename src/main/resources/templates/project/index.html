@@ -32,7 +32,7 @@
 					<tbody>
 						<tr th:each="project : ${projects}">
 							<td class="col-md-3" scope="row"><a
-								th:href="@{/admin/project/create(id=${project.id})}"
+								th:href="@{'/project/details/'+${project.id}}"
 								th:text="${project.name}"></a></td>
 							<td class="col-md-2" th:text="${project.location}"></td>
 							<td class="col-md-2" th:text="${project.startDate}"></td>
@@ -40,7 +40,7 @@
 							<td class="col-md-2" th:text="${project.status}"></td>
 							<td class="col-md-1">
 								<form method="post"
-									th:action="@{'/admin/project/delete/'+${project.id}}">
+									th:action="@{'/project/delete/'+${project.id}}">
 									<input type="submit" class="btn btn-danger" value="Delete" />
 								</form>
 							</td>
@@ -49,7 +49,7 @@
 				</table>
 			</div>
 			<div class="panel-footer">
-				<form th:action="@{/admin/project/create}" method="get">
+				<form th:action="@{/project/create}" method="get">
 					<button type="submit" class="btn btn-default"
 						aria-label="Left Align">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
