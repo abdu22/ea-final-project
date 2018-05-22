@@ -42,7 +42,7 @@ public class Project {
 	private ProjectStatusEnum status;
 
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
+	private List<Task> tasks = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "projects")
 	private List<User> users = new ArrayList<>();
@@ -103,12 +103,19 @@ public class Project {
 		this.status = status;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
-	
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 }

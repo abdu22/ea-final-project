@@ -14,16 +14,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Comment {
+public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@Lob
-	private String comment;
+	private String text;
 	
 	@Temporal(TemporalType.DATE)
-	private Date startDate;
+	private Date date;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")
@@ -41,22 +41,6 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
 	public Project getProject() {
 		return project;
 	}
@@ -71,5 +55,21 @@ public class Comment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }

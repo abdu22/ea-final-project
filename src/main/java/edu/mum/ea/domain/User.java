@@ -38,7 +38,7 @@ public class User {
 	private Address address;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
+	private List<Task> tasks = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLE", 
@@ -108,14 +108,6 @@ public class User {
 		this.address = address;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -136,5 +128,13 @@ public class User {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 }
