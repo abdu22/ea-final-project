@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mum.ea.domain.Comment;
 import edu.mum.ea.domain.Project;
 import edu.mum.ea.repository.ProjectRepository;
 
@@ -22,5 +23,9 @@ public class ProjectService {
 
 	public List<Project> findAll() {
 		return projectRepository.findAll();
+	}
+	
+	public Project findById(long id) {
+		return projectRepository.findById(id).get();
 	}
 }

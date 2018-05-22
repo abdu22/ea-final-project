@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	
 	@Lob
 	private String comment;
@@ -33,11 +33,11 @@ public class Comment {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

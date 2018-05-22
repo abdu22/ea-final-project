@@ -13,18 +13,18 @@ import javax.persistence.ManyToMany;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
 	private String name;
 	
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<User> users;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

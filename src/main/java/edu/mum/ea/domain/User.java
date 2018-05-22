@@ -47,12 +47,6 @@ public class User {
 	private List<Role> roles = new ArrayList<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "USER_SKILL", 
-			joinColumns = { @JoinColumn(name = "user_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "skill_id") })
-	private List<Skill> skills = new ArrayList<>();
-	
-	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_PROJECT", 
 			joinColumns = { @JoinColumn(name = "user_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "project_id") })
@@ -134,14 +128,6 @@ public class User {
 		if (!roles.contains(role)) {
 			roles.add(role);
 		}
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
 	}
 
 	public List<Project> getProjects() {

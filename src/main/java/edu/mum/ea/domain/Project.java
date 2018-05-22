@@ -22,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
 	private String name;
 
@@ -47,11 +47,11 @@ public class Project {
 	@ManyToMany(mappedBy = "projects")
 	private List<User> users = new ArrayList<>();
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

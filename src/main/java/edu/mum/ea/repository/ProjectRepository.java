@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import edu.mum.ea.domain.Project;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Integer> {
+public interface ProjectRepository extends JpaRepository<Project, Long> {
 
 }

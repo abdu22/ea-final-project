@@ -20,7 +20,7 @@ public class RoleService {
 		return roleRepository.findAll();
 	}
 
-	public Role getRole(int id) {
+	public Role getRole(long id) {
 		return roleRepository.findById(id).get();
 	}
 }
