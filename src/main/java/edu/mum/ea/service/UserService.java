@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.ea.config.RabbitMqConfig;
+import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.User;
 import edu.mum.ea.repository.UserRepository;
 
@@ -37,6 +38,10 @@ public class UserService {
 			return users.get(0);
 		}
 		return null;
+	}
+	
+	public User findById(long id) {
+		return userRepository.findById(id).get();
 	}
 	
 	public void sendEmail(User user) {

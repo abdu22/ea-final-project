@@ -15,7 +15,7 @@ import edu.mum.ea.domain.ProjectStatusEnum;
 import edu.mum.ea.service.ProjectService;
 
 @Controller
-@RequestMapping("/admin/project")
+@RequestMapping("/project")
 public class ProjectController {
 
 	@Autowired
@@ -29,17 +29,17 @@ public class ProjectController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("projects", projectService.findAll());
-		return "admin/project/index";
+		return "project/index";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String get(@ModelAttribute("project") Project project) {
-		return "admin/project/create";
+		return "project/create";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(@ModelAttribute("project") Project project) {
 		projectService.save(project);
-		return "redirect:/admin/project/";
+		return "redirect:/project/";
 	}
 }
