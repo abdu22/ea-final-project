@@ -26,7 +26,7 @@ public class AccountController {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	@GetMapping("/account/signup")
+	@GetMapping("/signup")
 	public String signUp(Model model, @ModelAttribute("user") User user) {
 		// set the default role for a new user
 		user.addRole(roleService.getRole(2));
@@ -34,7 +34,7 @@ public class AccountController {
 		return "account/signup";
 	}
 
-	@PostMapping("/account/signup")
+	@PostMapping("/signup")
 	public String createNewAccount(Model model, @ModelAttribute("user") User user) {
 		User existingUser = userService.findByEmail(user.getEmail());
 		if (existingUser != null) {
