@@ -14,7 +14,7 @@ import edu.mum.ea.service.UserService;
 public class SessionListener {
 
 	@Autowired
-	UserService service;
+	UserService userService;
 
 	@Autowired
 	HttpSession session;
@@ -24,7 +24,7 @@ public class SessionListener {
 			return (User) session.getAttribute("loggedUser");
 		}
 		
-		User user = service.findByEmail(getUserName());
+		User user = userService.findByEmail(getUserName());
 		session.setAttribute("loggedUser", user);
 		return user;
 	}

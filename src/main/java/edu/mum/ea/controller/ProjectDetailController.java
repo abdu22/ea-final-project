@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.ea.config.SessionListener;
-import edu.mum.ea.domain.Task;
 import edu.mum.ea.domain.Project;
+import edu.mum.ea.domain.Task;
 import edu.mum.ea.domain.User;
-import edu.mum.ea.service.TaskService;
 import edu.mum.ea.service.ProjectService;
+import edu.mum.ea.service.TaskService;
 import edu.mum.ea.service.UserService;
 
 @Controller

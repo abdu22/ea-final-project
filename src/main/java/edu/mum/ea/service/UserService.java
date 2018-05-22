@@ -1,56 +1,18 @@
 package edu.mum.ea.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import edu.mum.ea.config.RabbitMqConfig;
-import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.User;
-import edu.mum.ea.repository.UserRepository;
 
-@Service
-@Transactional
-public class UserService {
+public interface UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+	public User save(User user);
 
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
+	public List<User> findAll();
 
-	public User save(User user) {
-		return userRepository.save(user);
-	}
+	public User findByEmail(String email);
 
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
-	
-	public User findByEmail(String email) {
-		List<User> users = userRepository.findByEmailAllIgnoreCase(email);
-		if (users.size() > 0) {
-			return users.get(0);
-		}
-		return null;
-	}
-	
-	public User findById(long id) {
-		return userRepository.findById(id).get();
-	}
-	
-	public void sendEmail(User user) {
-		Map<String, String> map = new HashMap<>();
-		map.put("email_to", user.getEmail());
+	public User findById(long id);
 
-		map.put("email_title", "Welcome");
-		map.put("email_content", "Hello " + user.getName() + "!");
-
-		rabbitTemplate.convertAndSend(RabbitMqConfig.MESSAGE_QUEUE, map);
-	}
+	public void sendEmail(User user);
 }
