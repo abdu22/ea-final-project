@@ -4,9 +4,9 @@ INSERT INTO `ea_final_project`.`role` (`id`, `name`) VALUES ('2', 'DEVELOPER');
 INSERT INTO `ea_final_project`.`role` (`id`, `name`) VALUES ('3', 'PROJECT_MANAGER');
 
 -- Users
-INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `name`,`password`) VALUES ('1', 'Ho Chi Minh', 'Vietnam', 'hoainguyen@mum.edu', 1, 'Hoai Nguyen','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
-INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `name`,`password`) VALUES ('2', 'Fairfield', 'US', 'btasefa@mum.edu', 1, 'Beakal Asefa','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
-INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `name`,`password`) VALUES ('3', 'New York', 'US', 'test.dev@mum.edu', 1, 'Developer','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
+INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `first_name`, `last_name`,`password`) VALUES ('1', 'Ho Chi Minh', 'Vietnam', 'hoainguyen@mum.edu', 1, 'Hoai', 'Nguyen','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
+INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `first_name`, `last_name`,`password`) VALUES ('2', 'Fairfield', 'US', 'btasefa@mum.edu', 1, 'Beakal', ' Asefa','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
+INSERT INTO `ea_final_project`.`user` (`id`, `city`, `country`, `email`, `enabled`, `first_name`, `last_name`,`password`) VALUES ('3', 'New York', 'US', 'test.dev@mum.edu', 1, 'Developer', 'Developer','$2a$10$.mxbiC0qCmeHuhrL9HSdGuuEUaKkaWCvoPqiCe/X9sUCOuTlFh5/6');
 
 --User roles
 INSERT INTO `ea_final_project`.`user_role` (`user_id`, `role_id`) VALUES ('1', '1');

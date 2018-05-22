@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 		map.put("email_to", user.getEmail());
 
 		map.put("email_title", "Welcome");
-		map.put("email_content", "Hello " + user.getName() + "!");
+		map.put("email_content", "Hello " + user.getFirstName() + "!");
 
 		rabbitTemplate.convertAndSend(RabbitMqConfig.MESSAGE_QUEUE, map);
 	}

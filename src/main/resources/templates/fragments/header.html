@@ -25,11 +25,11 @@
 						<a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">
-							<span th:text="'Hello ' + ${@sessionListener.user.name}"></span>
+							<span th:text="'Hello ' + ${@sessionListener.user.firstName}"></span>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="/me/account/update">My Account</a></li>
+							<li><a href="/account/update">My Account</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="/user/logout">Logout</a></li>
 						</ul>
