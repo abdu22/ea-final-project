@@ -42,6 +42,7 @@ public class AccountController {
 		} else {
 			user.setPassword(encoder.encode(user.getPassword()));
 			userService.save(user);
+			userService.sendEmail(user);
 			model.addAttribute("infoMsg", "Your new account has been created sucessfully. Click here to login");
 		}
 		return "account/signup";
