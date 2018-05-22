@@ -38,7 +38,8 @@ public class UserServiceImpl implements UserService {
 			return users.get(0);
 		}
 		return null;
-	}
+	}	
+	
 
 	public User findById(long id) {
 		return userRepository.findById(id).get();
@@ -52,5 +53,14 @@ public class UserServiceImpl implements UserService {
 		map.put("email_content", "Hello " + user.getName() + "!");
 
 		rabbitTemplate.convertAndSend(RabbitMqConfig.MESSAGE_QUEUE, map);
+	}
+
+	@Override
+	public List<User> findByRole(long roleId) {
+		List<User> users = userRepository.findByRole(roleId);
+		if (users.size() > 0) {
+			return users;
+		}
+		return null;		
 	}
 }

@@ -15,4 +15,6 @@ public interface UserService {
 	public User findById(long id);
 
 	public void sendEmail(User user);
+	
+	public List<User> findByRole(long roleId);
 }

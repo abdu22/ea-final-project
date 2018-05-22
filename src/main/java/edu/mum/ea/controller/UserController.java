@@ -19,8 +19,12 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("users", userService.findAll());
+	public String list(@RequestParam("type") String type, Model model) {
+		if(type.equalsIgnoreCase("dev")) 
+			model.addAttribute("users", userService.findByRole(2));
+		else 
+			model.addAttribute("users", userService.findAll());
+		
 		return "user/index";
 	}
 	
