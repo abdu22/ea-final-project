@@ -38,7 +38,7 @@ public class ProjectDetailController {
 	private UserService userService;
 
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
-	public String showDetails(Model model, @PathVariable("id") int id, @ModelAttribute("task") Task task) {
+	public String showDetails(Model model, @PathVariable("id") int id, @ModelAttribute("task") Task task, @ModelAttribute("developer") User developer) {
 		Project project = projectService.findById(id);
 		model.addAttribute("developers", userService.findByRole(2)); //retrieve all developers
 		model.addAttribute("project", project);
@@ -47,10 +47,13 @@ public class ProjectDetailController {
 	}
 	
 	@PostMapping("/developer/add")
-	public String assignDeveloper(Model model, @ModelAttribute("devId") String devId,
+	public String assignDeveloper(Model model, @ModelAttribute("developer") User developer,
 			@RequestParam(value = "projectId", required = true) Integer projectId) {		
-		Project project = projectService.findById(projectId);		
-//		project.getUsers().add(userService.findById(developer.getId()));
+		Project project = projectService.findById(projectId);
+		User user = userService.findById(developer.getId());
+		project.getUsers().add(user);
+		user.getProjects().add(project);
+		userService.save(user);
 		projectService.save(project);
 		return "redirect:/project/details/" + projectId;
 	}
