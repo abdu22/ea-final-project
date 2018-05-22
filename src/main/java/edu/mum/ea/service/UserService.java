@@ -23,4 +23,12 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
+	
+	public User findByEmail(String email) {
+		List<User> users = userRepository.findByEmailAllIgnoreCase(email);
+		if (users.size() > 0) {
+			return users.get(0);
+		}
+		return null;
+	}
 }

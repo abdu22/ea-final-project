@@ -129,6 +129,12 @@ public class User {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public void addRole(Role role) {
+		if (!roles.contains(role)) {
+			roles.add(role);
+		}
+	}
 
 	public List<Skill> getSkills() {
 		return skills;
