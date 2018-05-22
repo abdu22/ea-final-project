@@ -6,7 +6,7 @@
 <title></title>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-static-top" th:fragment="menu">
+	<nav class="navbar navbar-default navbar-static-top" th:fragment="header">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
@@ -21,11 +21,11 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
+					<li class="dropdown" sec:authorize="isAuthenticated()">
 						<a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">
-							<span th:text="'Hello Duke'"></span>
+							<span th:text="'Hello ' + ${@sessionListener.user.name}"></span>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
@@ -34,16 +34,15 @@
 							<li><a href="/user/logout">Logout</a></li>
 						</ul>
 					</li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Administration<span class="caret"></span></a>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/project/">Project Management</a></li>
 							<li><a href="/admin/user/">User Management</a></li>
 							<li><a href="/admin/skill/">Skill Management</a></li>
 						</ul>
 					</li>
-					<li><a href="/user/login">Login</a></li>
+					<li sec:authorize="!isAuthenticated()"><a href="/user/login">Login</a></li>
 				</ul>
 			</div>
 		</div>
