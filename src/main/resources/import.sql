@@ -25,6 +25,7 @@ INSERT INTO `ea_final_project`.`project` (`id`, `description`, `end_date`, `loca
 
 -- Project assignment
 INSERT INTO `ea_final_project`.`user_project` (`user_id`, `project_id`) VALUES ('3', '1');
+INSERT INTO `ea_final_project`.`user_project` (`user_id`, `project_id`) VALUES ('5', '2');
 
 UPDATE `ea_final_project`.`hibernate_sequence` SET `next_val` = 1000 where `next_val`< 1000
 

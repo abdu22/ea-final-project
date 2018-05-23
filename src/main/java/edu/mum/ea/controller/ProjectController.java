@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.mum.ea.config.SessionListener;
 import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.ProjectStatusEnum;
+import edu.mum.ea.domain.Role;
 import edu.mum.ea.domain.User;
 import edu.mum.ea.service.ProjectService;
 import edu.mum.ea.service.UserService;
@@ -26,6 +28,9 @@ public class ProjectController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SessionListener sessionListener;
 
 
 	@ModelAttribute("projectStatuses")
@@ -35,7 +40,21 @@ public class ProjectController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String list(Model model) {
-		model.addAttribute("projects", projectService.findAll());
+		List<Role> roles = sessionListener.getUser().getRoles();
+		
+		for (Role role : roles) {
+			if(role.getName().equalsIgnoreCase("PROJECT_MANAGER")) {
+				model.addAttribute("projects", projectService.findAll());
+			}
+			
+			if(role.getName().equalsIgnoreCase("DEVELOPER")) {
+				model.addAttribute("projects", projectService.findByDeveloper(sessionListener.getUser().getId()));
+			}
+			
+		}
+
+
+		
 		return "project/index";
 	}
 

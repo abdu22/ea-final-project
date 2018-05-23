@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<title>Project Management</title>	
+<title>Project Management</title>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
-	
+
 	<h1 class="display-3 text-center my-4">Project Management</h1>
 	<div class="container">
 		<div class="row" sec:authorize="isAuthenticated()">
-			<div class="panel panel-default">
+			<div class="panel panel-default"
+				sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
 				<div class="panel-heading">
 					<h3 class="panel-title">Search</h3>
 				</div>
@@ -25,20 +29,23 @@
 						<div class="form-group row">
 							<label for="name" class="col-sm-2 col-form-label">Name</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="nameShow" placeholder="Name" th:field="*{name}" />
+								<input type="text" class="form-control" id="nameShow"
+									placeholder="Name" th:field="*{name}" />
 							</div>
 							<label for="name" class="col-sm-2 col-form-label">Status</label>
 							<div class="col-sm-4">
 								<select th:field="*{status}" class="form-control">
 									<option th:text="${'ALL'}" th:value="${'ALL'}"></option>
-									<option th:each="status : ${projectStatuses}" th:value="${status}" th:text="${status}"></option>
+									<option th:each="status : ${projectStatuses}"
+										th:value="${status}" th:text="${status}"></option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="name" class="col-sm-2 col-form-label">Location</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="location" placeholder="Location" th:field="*{location}" />
+								<input type="text" class="form-control" id="location"
+									placeholder="Location" th:field="*{location}" />
 							</div>
 						</div>
 						<input type="submit" class="btn btn-primary" value="Search" />
@@ -52,35 +59,43 @@
 					<h3 class="panel-title">Projects</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Name</th>
-								<th scope="col">Status</th>
-								<th scope="col">Start Date</th>
-								<th scope="col">End Date</th>
-								<th scope="col">Location</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="proj : ${projects}">
-								<td class="col-md-2" scope="row"><a
-									th:href="@{'/project/details/'+${proj.id}}"
-									th:text="${proj.name}"> </a></td>
-								<td class="col-md-2" th:text="${proj.status}"></td>
-								<td class="col-md-2" th:text="${proj.startDate}"></td>
-								<td class="col-md-2" th:text="${proj.endDate}"></td>
-								<td class="col-md-2" th:text="${proj.location}"></td>
-							</tr>
-						</tbody>
-					</table>
+					<div th:if="${not #lists.isEmpty(projects)}">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Name</th>
+									<th scope="col">Status</th>
+									<th scope="col">Start Date</th>
+									<th scope="col">End Date</th>
+									<th scope="col">Location</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="proj : ${projects}">
+									<td class="col-md-2" scope="row"><a
+										th:href="@{'/project/details/'+${proj.id}}"
+										th:text="${proj.name}"> </a></td>
+									<td class="col-md-2" th:text="${proj.status}"></td>
+									<td class="col-md-2" th:text="${proj.startDate}"></td>
+									<td class="col-md-2" th:text="${proj.endDate}"></td>
+									<td class="col-md-2" th:text="${proj.location}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="alert alert-warning" role="alert"
+						th:if="${#lists.isEmpty(projects)}">No available projects</div>
+
+
+
+
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- <div th:replace="fragments/footer :: footer"></div> -->
-	<div style="margin-top:500px;"></div>
+	<div style="margin-top: 500px;"></div>
 
 </body>
 </html>

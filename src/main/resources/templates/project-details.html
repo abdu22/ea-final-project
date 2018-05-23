@@ -98,7 +98,7 @@
 									class="form-control" th:field="*{id}">
 									<option value="0"></option>
 									<option th:each="dev : ${developers}" th:value="${dev.id}"
-										th:text="${dev.firstName}"></option>
+										th:text="${dev.fullName} + ' (' +  ${dev.email} + ')'"></option>
 								</select>
 								<button type="submit" class="btn btn-success"
 									aria-label="Left Align">Assign</button>

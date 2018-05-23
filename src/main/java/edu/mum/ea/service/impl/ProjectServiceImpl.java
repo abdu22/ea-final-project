@@ -51,4 +51,9 @@ public class ProjectServiceImpl implements ProjectService {
 		Project project = projectRepository.findById(id).get();
 		projectRepository.delete(project);
 	}
+
+	@Override
+	public List<Project> findByDeveloper(long userId) {
+		return projectRepository.findByDeveloper(userId);
+	}
 }

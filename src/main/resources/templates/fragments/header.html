@@ -39,7 +39,7 @@
 						<a href="/user/?type=dev">Developers</a>
 					</li>
 					
-					<li sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
+					<li sec:authorize="hasAnyRole('ROLE_PROJECT_MANAGER', 'ROLE_DEVELOPER')">
 						<a href="/project/">Projects</a>
 					</li>
 					

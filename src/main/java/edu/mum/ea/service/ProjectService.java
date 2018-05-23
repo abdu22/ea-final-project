@@ -19,4 +19,6 @@ public interface ProjectService {
 	public List<Project> search(SearchProjectParam params);
 
 	public void delete(long id);
+	
+	public List<Project> findByDeveloper(long userId);
 }
