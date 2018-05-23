@@ -1,21 +1,13 @@
 package edu.mum.ea.domain;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Embeddable
 public class Address {
-	
-	@NotEmpty(message= "{NotEmpty}")
-	private String city;
-	@Size(min=2, max=2, message = "Size.state")
-	private String state;
-	@NotEmpty(message= "{NotEmpty}")
-	private String country;
 
-	@Pattern(regexp="^\\d{5}(-\\d{4})?$", message= "{Pattern.zipcode}")
+	private String city;
+	private String state;
+	private String country;
 	private String zipcode;
 
 	public String getCity() {

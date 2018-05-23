@@ -12,8 +12,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Task {
@@ -22,7 +20,6 @@ public class Task {
 	private long id;
 	
 	@Lob
-	@NotEmpty(message= "{NotEmpty}")
 	private String text;
 	
 	@Temporal(TemporalType.DATE)
