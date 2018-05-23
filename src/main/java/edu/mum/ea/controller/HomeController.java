@@ -29,6 +29,8 @@ public class HomeController {
 		List<Role> roles = new ArrayList<>();
 		if (sessionListener.getUser() != null) {
 			roles = sessionListener.getUser().getRoles();
+		} else {
+			return "redirect:/user/login";
 		}
 		if (roles != null) {
 			for (Role role : roles) {
