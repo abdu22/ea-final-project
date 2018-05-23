@@ -1,9 +1,7 @@
 package edu.mum.ea.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,7 +61,7 @@ public class User {
 	@JoinTable(name = "USER_PROJECT", 
 			joinColumns = { @JoinColumn(name = "user_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "project_id") })
-	private Set<Project> projects = new HashSet<>();
+	private List<Project> projects = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -143,15 +141,11 @@ public class User {
 		}
 	}
 
-	public void addProject(Project project) {
-		projects.add(project);
-	}
-	
-	public Set<Project> getProjects() {
+	public List<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(Set<Project> projects) {
+	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
 

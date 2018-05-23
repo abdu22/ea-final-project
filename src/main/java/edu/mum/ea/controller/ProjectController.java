@@ -2,7 +2,6 @@ package edu.mum.ea.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,12 +46,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(@ModelAttribute("project") Project project) {
-
-		Set<User> users = project.getUsers();
-		for (User user: users) {
-			user.addProject(project);
-		}
-
+		
 		projectService.save(project);
 		return "redirect:/project/";
 	}
