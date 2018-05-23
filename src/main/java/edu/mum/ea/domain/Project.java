@@ -2,7 +2,9 @@ package edu.mum.ea.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,9 +45,9 @@ public class Project {
 
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Task> tasks = new ArrayList<>();
-	
+
 	@ManyToMany(mappedBy = "projects")
-	private List<User> users = new ArrayList<>();
+	private Set<User> users = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -103,13 +105,13 @@ public class Project {
 		this.status = status;
 	}
 
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+	public void setUsers(Set<User> users) {
+ 		this.users = users;
+ 	}
 
 	public List<Task> getTasks() {
 		return tasks;
