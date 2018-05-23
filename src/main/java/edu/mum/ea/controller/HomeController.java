@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import edu.mum.ea.config.SessionListener;
-import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.ProjectStatusEnum;
 import edu.mum.ea.domain.Role;
 import edu.mum.ea.service.ProjectService;
@@ -22,20 +20,16 @@ import edu.mum.ea.utils.SearchProjectParam;
 public class HomeController {
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private SessionListener sessionListener;
 
 	@GetMapping({ "/", "/index", "/home", "/search" })
 	public String getHomePage(Model model, @ModelAttribute("search") SearchProjectParam searchProjectParam) {
-
 		List<Role> roles = new ArrayList<>();
-		if(sessionListener.getUser() !=null) {
+		if (sessionListener.getUser() != null) {
 			roles = sessionListener.getUser().getRoles();
 		}
-		
-		
-
 		if (roles != null) {
 			for (Role role : roles) {
 				if (role.getName().equalsIgnoreCase("PROJECT_MANAGER")) {
@@ -47,11 +41,9 @@ public class HomeController {
 				}
 
 			}
-		}else{
+		} else {
 			model.addAttribute("projects", null);
 		}
-
-		//model.addAttribute("projects", projectService.findAll());
 		return "index";
 	}
 
