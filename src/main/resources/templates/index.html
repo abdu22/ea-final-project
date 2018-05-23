@@ -19,7 +19,7 @@
 	<h1 class="display-3 text-center my-4">Project Management</h1>
 	<div class="container">
 		<div class="row" sec:authorize="isAuthenticated()">
-			<div class="panel panel-default"
+			<div class="panel panel-primary"
 				sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
 				<div class="panel-heading">
 					<h3 class="panel-title">Search</h3>
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<div class="row" sec:authorize="isAuthenticated()">
-			<div class="panel panel-default">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">Projects</h3>
 				</div>

@@ -14,7 +14,7 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container">
 		<div class="row">
-			<div class="panel panel-default">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">User Detail</h3>
 				</div>
@@ -32,7 +32,7 @@
 			</div>
 		
 		
-			<div class="panel panel-default" sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
+			<div class="panel panel-primary" sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
 				<div class="panel-heading">
 					<h3 class="panel-title">Assigned Projects</h3>
 				</div>
