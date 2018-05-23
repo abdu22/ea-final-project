@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +16,59 @@
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Detail</h3>
+					<h3 class="panel-title">User Detail</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Project Name</th>
-								<th scope="col">Location</th>
-								<th scope="col">Start Date</th>
-								<th scope="col">End Date</th>
-								<th scope="col">Status</th>
-
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="project : ${user.projects}">
-								<td class="col-md-2" th:text="${project.name}"></td>
-								<td class="col-md-2" th:text="${project.location}"></td>
-								<td class="col-md-2" th:text="${project.startDate}"></td>
-								<td class="col-md-2" th:text="${project.endDate}"></td>
-								<td class="col-md-2" th:text="${project.status}"></td>
-								<td class="col-md-1"><a th:href="@{'/project/details/'+${project.id}}">Detail</a></td>
-							</tr>
-						</tbody>
-					</table>
+					<p><strong>First Name</strong>: <span th:text="${user.firstName}"></span></p>
+					<p><strong>Last Name</strong>: <span th:text="${user.lastName}"></span></p>
+					<p><strong>Email</strong>: <span th:text="${user.email}"></span></p>
+					<p><strong>Phone</strong>: <span th:text="${user.phone}"></span></p>
+					<p><strong>Country</strong>: <span th:text="${user.address.country}"></span></p>
+					<p><strong>City</strong>: <span th:text="${user.address.city}"></span></p>
+					<p><strong>State</strong>: <span th:text="${user.address.state}"></span></p>
+					<p><strong>Zip Code</strong>: <span th:text="${user.address.zipcode}"></span></p>
+					
+				</div>
+			</div>
+		
+		
+			<div class="panel panel-default" sec:authorize="hasRole('ROLE_PROJECT_MANAGER')">
+				<div class="panel-heading">
+					<h3 class="panel-title">Assigned Projects</h3>
+				</div>
+				<div class="panel-body">
+					<div th:if="${not #lists.isEmpty(user.projects)}">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Project Name</th>
+									<th scope="col">Location</th>
+									<th scope="col">Start Date</th>
+									<th scope="col">End Date</th>
+									<th scope="col">Status</th>
+	
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="project : ${user.projects}">
+									<td class="col-md-5 " th:text="${project.name}"></td>
+									<td class="col-md-2" th:text="${project.location}"></td>
+									<td class="col-md-1" th:text="${project.startDate}"></td>
+									<td class="col-md-1" th:text="${project.endDate}"></td>
+									<td class="col-md-1" th:text="${project.status}"></td>
+									<td class="col-md-1"><a th:href="@{'/project/details/'+${project.id}}">Detail</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="alert alert-warning" role="alert"
+						th:if="${#lists.isEmpty(user.projects)}">
+							There are no assigned project for this developer
+					</div>
+				
+					
 				</div>
 
 			</div>
