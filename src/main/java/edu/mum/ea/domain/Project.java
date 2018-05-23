@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,11 +26,11 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
+	@NotEmpty(message= "{NotEmpty}")
 	private String name;
-
+	@NotEmpty(message= "{NotEmpty}")
 	private String description;
-
+	@NotEmpty(message= "{NotEmpty}")
 	private String location;
 
 	@Temporal(TemporalType.DATE)
