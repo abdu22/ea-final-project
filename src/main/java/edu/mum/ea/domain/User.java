@@ -41,7 +41,7 @@ public class User {
 
 	@EmptyOrSize(min=6, max = 100, message= "{EmptyOrSize}")
 	private String password;
-	@Pattern(regexp="^\\d{3}(-\\d{7})?$", message= "{Pattern.phoneNO}")
+//	@Pattern(regexp="^\\d{3}(-\\d{7})?$", message= "{Pattern.phoneNO}")
 	private String phone;
 
 

@@ -19,8 +19,8 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String list(@RequestParam("type") String type, Model model) {
-		if(type.equalsIgnoreCase("dev")) 
+	public String list(@RequestParam(value = "type", required = false) String type, Model model) {
+		if("dev".equalsIgnoreCase(type)) 
 			model.addAttribute("users", userService.findByRole(2));
 		else 
 			model.addAttribute("users", userService.findAll());
