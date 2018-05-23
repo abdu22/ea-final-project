@@ -3,6 +3,7 @@ package edu.mum.ea.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.ea.config.RabbitMqConfig;
+import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.User;
 import edu.mum.ea.repository.UserRepository;
 import edu.mum.ea.service.UserService;
@@ -67,5 +69,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(long id) {
 		User user = userRepository.findById(id).get();
 		userRepository.delete(user);
+	}
+	
+	public List<User> findAvailableDevelopers(Project project) {
+		List<User> availableDevs = userRepository.findAvailableDevelopers(project.getId());
+		
+		return availableDevs;
 	}
 }

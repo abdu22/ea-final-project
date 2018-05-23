@@ -2,6 +2,7 @@ package edu.mum.ea.service;
 
 import java.util.List;
 
+import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.User;
 
 public interface UserService {
@@ -19,4 +20,6 @@ public interface UserService {
 	public List<User> findByRole(long roleId);
 
 	public void delete(long id);
+	
+	public List<User> findAvailableDevelopers(Project project);
 }

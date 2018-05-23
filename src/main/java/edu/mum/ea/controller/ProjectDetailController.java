@@ -41,7 +41,7 @@ public class ProjectDetailController {
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public String showDetails(Model model, @PathVariable("id") int id, @ModelAttribute("task") Task task, @ModelAttribute("developer") User developer) {
 		Project project = projectService.findById(id);
-		List<User> unassignedDevelopers = userService.findByRole(2).stream().filter(d->!d.getProjects().contains(project)).collect(Collectors.toList());
+		List<User> unassignedDevelopers = userService.findAvailableDevelopers(project);
 		model.addAttribute("developers", unassignedDevelopers); //retrieve all developers
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
