@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="user : ${users}">
-							<td class="col-md-2" th:text="${user.name}"></td>
+							<td class="col-md-2" th:text="${user.firstName} + ' '+${user.lastName}"></td>
 							<td class="col-md-2" th:text="${user.email}"></td>
 							<td class="col-md-1" th:text="${user.phone}"></td>
 							<td class="col-md-3" th:text="${user.address}"></td>
