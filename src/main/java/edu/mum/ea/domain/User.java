@@ -15,6 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
+import edu.mum.ea.validation.EmptyOrSize;
 
 @Entity
 public class User {
@@ -22,26 +27,30 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
-	private String firstName;	
 	
+	@NotEmpty(message= "{NotEmpty}")
+	private String firstName;	
+	@NotEmpty(message= "{NotEmpty}")
 	private String lastName;
 
 	@Column(unique = true)
+	@Pattern(regexp="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message= "{Pattern.email}")
 	private String email;
 
+	@EmptyOrSize(min=6, max = 100, message= "{EmptyOrSize}")
 	private String password;
-
+	@Pattern(regexp="^\\d{3}(-\\d{7})?$", message= "{Pattern.phoneNO}")
 	private String phone;
 
-	private boolean enabled;
 
+	private boolean enabled;
+	@Valid
 	@Embedded
 	private Address address;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Task> tasks = new ArrayList<>();
-
+	@Valid
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLE", 
 			joinColumns = { @JoinColumn(name = "user_id") }, 
@@ -146,9 +155,5 @@ public class User {
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
-	}
-	
-	public String getFullName() {
-		return this.firstName + " " + this.lastName;
 	}
 }
