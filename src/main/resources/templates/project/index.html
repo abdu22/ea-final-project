@@ -37,11 +37,11 @@
 							<td class="col-md-2" th:text="${project.location}"></td>
 							<td class="col-md-2" th:text="${project.startDate}"></td>
 							<td class="col-md-2" th:text="${project.endDate}"></td>
-							<td class="col-md-2" th:text="${project.status}"></td>
+							<td class="col-md-2"><kbd th:text="${project.status}"></kbd></td>
 							<td class="col-md-1">
 								<form method="post"
 									th:action="@{'/project/delete/'+${project.id}}">
-									<input type="submit" class="btn btn-danger" value="Delete" />
+									<input type="submit" class="btn btn-danger btn-sm" value="Delete" />
 								</form>
 							</td>
 						</tr>
