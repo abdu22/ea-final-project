@@ -2,6 +2,7 @@ package edu.mum.ea.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,8 @@ public class ProjectDetailController {
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public String showDetails(Model model, @PathVariable("id") int id, @ModelAttribute("task") Task task, @ModelAttribute("developer") User developer) {
 		Project project = projectService.findById(id);
-		model.addAttribute("developers", userService.findByRole(2)); //retrieve all developers
+		List<User> unassignedDevelopers = userService.findByRole(2).stream().filter(d->!d.getProjects().contains(project)).collect(Collectors.toList());
+		model.addAttribute("developers", unassignedDevelopers); //retrieve all developers
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
 		return "project-details";
@@ -55,6 +57,20 @@ public class ProjectDetailController {
 		user.getProjects().add(project);
 		userService.save(user);
 		projectService.save(project);
+		return "redirect:/project/details/" + projectId;
+	}
+	
+	@RequestMapping("/developer/remove/{developerId}")
+	public String unassignDeveloper(Model model, @PathVariable("developerId") Long developerId,
+			@RequestParam(value = "projectId", required = true) Integer projectId) {
+		Project project = projectService.findById(projectId);
+		User developer = userService.findById(developerId);
+		project.getUsers().remove(developer);
+		developer.getProjects().remove(project);
+		userService.save(developer);
+		projectService.save(project);
+		
+		
 		return "redirect:/project/details/" + projectId;
 	}
 	
