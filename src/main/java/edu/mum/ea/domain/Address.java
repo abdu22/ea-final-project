@@ -2,6 +2,8 @@ package edu.mum.ea.domain;
 
 import javax.persistence.Embeddable;
 
+import org.springframework.util.StringUtils;
+
 @Embeddable
 public class Address {
 
@@ -40,5 +42,28 @@ public class Address {
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+
+		if (!StringUtils.isEmpty(city)) {
+			sb.append(city);
+		}
+
+		if (!StringUtils.isEmpty(state)) {
+			sb.append(", ").append(state);
+		}
+
+		if (!StringUtils.isEmpty(country)) {
+			sb.append(", ").append(country);
+		}
+		
+		if (!StringUtils.isEmpty(zipcode)) {
+			sb.append(", ").append(zipcode);
+		}
+		
+		return sb.toString();
 	}
 }
