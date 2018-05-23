@@ -147,4 +147,8 @@ public class User {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+	
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
 }
