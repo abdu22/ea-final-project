@@ -18,6 +18,37 @@
 		<div class="row" sec:authorize="isAuthenticated()">
 			<div class="panel panel-default">
 				<div class="panel-heading">
+					<h3 class="panel-title">Search</h3>
+				</div>
+				<div class="panel-body">
+					<form th:object="${search}" th:action="@{/search}" method="post">
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nameShow" placeholder="Name" th:field="*{name}" />
+							</div>
+							<label for="name" class="col-sm-2 col-form-label">Status</label>
+							<div class="col-sm-4">
+								<select th:field="*{status}" class="form-control">
+									<option th:text="${'ALL'}" th:value="${'ALL'}"></option>
+									<option th:each="status : ${projectStatuses}" th:value="${status}" th:text="${status}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Location</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="location" placeholder="Location" th:field="*{location}" />
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary" value="Search" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row" sec:authorize="isAuthenticated()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
 					<h3 class="panel-title">Projects</h3>
 				</div>
 				<div class="panel-body">
