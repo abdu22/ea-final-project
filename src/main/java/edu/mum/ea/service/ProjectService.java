@@ -8,7 +8,7 @@ import edu.mum.ea.utils.SearchProjectParam;
 
 public interface ProjectService {
 
-	public Project save(Project project);
+	public void save(Project project);
 
 	public List<Project> findAll();
 

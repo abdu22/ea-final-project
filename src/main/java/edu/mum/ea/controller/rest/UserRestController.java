@@ -20,8 +20,8 @@ public class UserRestController {
 	private UserService userService;
 
 	@PostMapping("/save")
-	public User save(@RequestBody User user) {
-		return userService.save(user);
+	public void save(@RequestBody User user) {
+		userService.save(user);
 	}
 
 	@PostMapping("/delete/{id}")

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mum.ea.dao.RoleDao;
 import edu.mum.ea.domain.Role;
-import edu.mum.ea.repository.RoleRepository;
 import edu.mum.ea.service.RoleService;
 
 @Service
@@ -15,13 +15,13 @@ import edu.mum.ea.service.RoleService;
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
-	private RoleRepository roleRepository;
+	private RoleDao roleDao;
 
 	public List<Role> getAll() {
-		return roleRepository.findAll();
+		return roleDao.findAll();
 	}
 
 	public Role getRole(long id) {
-		return roleRepository.findById(id).get();
+		return roleDao.findOne(id);
 	}
 }

@@ -1,4 +1,4 @@
-package edu.mum.ea.repository.impl;
+package edu.mum.ea.dao.impl;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import edu.mum.ea.dao.ProjectSearchDao;
 import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.ProjectStatusEnum;
-import edu.mum.ea.repository.ProjectSearchRepository;
 import edu.mum.ea.utils.SearchProjectParam;
 
 @Repository
-public class ProjectSearchRepositoryImpl implements ProjectSearchRepository {
+public class ProjectSearchDaoImpl implements ProjectSearchDao {
 	
 	@Autowired
 	private EntityManager em;

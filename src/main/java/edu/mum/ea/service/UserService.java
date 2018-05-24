@@ -7,7 +7,7 @@ import edu.mum.ea.domain.User;
 
 public interface UserService {
 
-	public User save(User user);
+	public void save(User user);
 
 	public List<User> findAll();
 

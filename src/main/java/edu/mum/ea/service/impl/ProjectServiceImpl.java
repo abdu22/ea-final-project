@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mum.ea.dao.ProjectDao;
+import edu.mum.ea.dao.ProjectSearchDao;
+import edu.mum.ea.dao.TaskDao;
 import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.Task;
-import edu.mum.ea.repository.ProjectRepository;
-import edu.mum.ea.repository.ProjectSearchRepository;
-import edu.mum.ea.repository.TaskRepository;
 import edu.mum.ea.service.ProjectService;
 import edu.mum.ea.utils.SearchProjectParam;
 
@@ -19,41 +19,40 @@ import edu.mum.ea.utils.SearchProjectParam;
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
-	private ProjectRepository projectRepository;
+	private ProjectDao projectDao;
 
 	@Autowired
-	private ProjectSearchRepository projectSearchRepository;
+	private ProjectSearchDao projectSearchDao;
 	
 	@Autowired
-	private TaskRepository taskRepository;
+	private TaskDao taskDao;
 
-	public Project save(Project project) {
-		return projectRepository.save(project);
+	public void save(Project project) {
+		projectDao.save(project);
 	}
 
 	public List<Project> findAll() {
-		return projectRepository.findAll();
+		return projectDao.findAll();
 	}
 	
 	public Project findById(long id) {
-		return projectRepository.findById(id).get();
+		return projectDao.findOne(id);
 	}
 	
 	public void removeTask(Task task) {
-		taskRepository.delete(task);
+		taskDao.delete(task.getId());
 	}
 	
 	public List<Project> search(SearchProjectParam params) {
-		return projectSearchRepository.search(params);
+		return projectSearchDao.search(params);
 	}
 	
 	public void delete(long id) {
-		Project project = projectRepository.findById(id).get();
-		projectRepository.delete(project);
+		projectDao.delete(id);
 	}
 
 	@Override
 	public List<Project> findByDeveloper(long userId) {
-		return projectRepository.findByDeveloper(userId);
+		return projectDao.findByDeveloper(userId);
 	}
 }

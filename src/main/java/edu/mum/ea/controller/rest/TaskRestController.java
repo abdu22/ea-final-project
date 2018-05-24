@@ -20,8 +20,8 @@ public class TaskRestController {
 	private TaskService taskService;
 
 	@PostMapping("/save")
-	public Task save(@RequestBody Task task) {
-		return taskService.save(task);
+	public void save(@RequestBody Task task) {
+		taskService.save(task);
 	}
 
 	@PostMapping("/delete/{id}")

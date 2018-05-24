@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.ea.config.RabbitMqConfig;
+import edu.mum.ea.dao.UserDao;
 import edu.mum.ea.domain.Project;
 import edu.mum.ea.domain.User;
-import edu.mum.ea.repository.UserRepository;
 import edu.mum.ea.service.UserService;
 
 @Service
@@ -20,21 +20,21 @@ import edu.mum.ea.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserDao userDao;
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	public User save(User user) {
-		return userRepository.save(user);
+	public void save(User user) {
+		userDao.save(user);
 	}
 
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return userDao.findAll();
 	}
 
 	public User findByEmail(String email) {
-		List<User> users = userRepository.findByEmailAllIgnoreCase(email);
+		List<User> users = userDao.findByEmailAllIgnoreCase(email);
 		if (users.size() > 0) {
 			return users.get(0);
 		}
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	
 
 	public User findById(long id) {
-		return userRepository.findById(id).get();
+		return userDao.findOne(id);
 	}
 
 	public void sendEmail(User user) {
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findByRole(long roleId) {
-		List<User> users = userRepository.findByRole(roleId);
+		List<User> users = userDao.findByRole(roleId);
 		if (users.size() > 0) {
 			return users;
 		}
@@ -66,12 +66,11 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public void delete(long id) {
-		User user = userRepository.findById(id).get();
-		userRepository.delete(user);
+		userDao.delete(id);
 	}
 	
 	public List<User> findAvailableDevelopers(Project project) {
-		List<User> availableDevs = userRepository.findAvailableDevelopers(project.getId());
+		List<User> availableDevs = userDao.findAvailableDevelopers(project.getId());
 		
 		return availableDevs;
 	}

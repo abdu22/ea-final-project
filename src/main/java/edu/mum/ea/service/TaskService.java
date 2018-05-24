@@ -6,7 +6,7 @@ import edu.mum.ea.domain.Task;
 
 public interface TaskService {
 
-	public Task save(Task task);
+	public void save(Task task);
 
 	public void delete(long id);
 

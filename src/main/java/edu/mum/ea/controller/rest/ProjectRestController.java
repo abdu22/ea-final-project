@@ -20,8 +20,8 @@ public class ProjectRestController {
 	private ProjectService projectService;
 
 	@PostMapping("/save")
-	public Project save(@RequestBody Project project) {
-		return projectService.save(project);
+	public void save(@RequestBody Project project) {
+		projectService.save(project);
 	}
 
 	@PostMapping("/delete/{id}")
