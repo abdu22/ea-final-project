@@ -22,6 +22,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import edu.mum.ea.validation.EmptyOrSize;
@@ -44,8 +45,10 @@ public class User {
 	@Pattern(regexp="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message= "{Pattern.email}")
 	private String email;
 
+	@JsonIgnore
 	@EmptyOrSize(min=6, max = 100, message= "{EmptyOrSize}")
 	private String password;
+	
 //	@Pattern(regexp="^\\d{3}(-\\d{7})?$", message= "{Pattern.phoneNO}")
 	private String phone;
 
@@ -57,13 +60,15 @@ public class User {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Task> tasks = new ArrayList<>();
-	@Valid
+	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_ROLE", 
 			joinColumns = { @JoinColumn(name = "user_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	private List<Role> roles = new ArrayList<>();
 	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_PROJECT", 
 			joinColumns = { @JoinColumn(name = "user_id") }, 
